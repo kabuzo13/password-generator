@@ -91,7 +91,7 @@ var upperCasedCharacters = [
 // Function to prompt user for password options
 function getPasswordOptions() {
   var length = prompt("Please choose a length for your password. It must be at least 8 characters");
-  // Alert if not given as a number
+  
   if (length < 8) {
     alert("Your password must contain at least 8 characters");
     return null;
@@ -99,18 +99,25 @@ function getPasswordOptions() {
   if (length > 128) {
     alert("Your password cannot contain more than 128 characters");
     return null;
-  }
+  };
+  
   var special = confirm("Would you like to include a special character?"); 
   var number = confirm("Would you like to include a number?");
   var upper = confirm("Would you like to include an upper case character?");
   var lower = confirm("Would you like to include a lower case character?");
-  if (special) {
-  } else if (number) {
-  } else if (upper) {
-  } else if (lower) {
+
+  if (special = true) {
+    return passwordOptions;
+  } else if (number = true) {
+    return passwordOptions;
+  } else if (upper = true) {
+    return passwordOptions;
+  } else if (lower = true) {
+    return passwordOptions;
   } else {
     alert("You must select at least one character type for your password");
   }
+}
 
   var passwordOptions = {
     length: length,
@@ -120,19 +127,44 @@ function getPasswordOptions() {
     lower: lower
   };
 
-  return passwordOptions;
-}
 getPasswordOptions()
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+    var randIndex = Math.floor(Math.random() * arr.length);
+    var randElement = arr[randIndex];
+    return randElement;
 }
 
 // Function to generate password with user input
 function generatePassword() {
+var options = getPasswordOptions();
 
+  var currentArr = new Array()
+  
+  if (options.special = true) {
+    currentArr = currentArr.concat(specialCharacters)
+  }
+  if (options.number = true) {
+    currentArr = currentArr.concat(numericCharacters)
+  }
+  if (options.lower = true) {
+    currentArr = currentArr.concat(lowerCasedCharacters)
+  }
+  if (options.upper = true) {
+    currentArr = currentArr.concat(upperCasedCharacters)
+  }
+  console.log(currentArr)
+  
+  let pass = ""
+  let i = 0
+  while (i < options.length) {
+    pass += getRandom(currentArr);
+    i++
+  } 
+  return pass;
 }
+generatePassword()
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
@@ -144,6 +176,7 @@ function writePassword() {
 
   passwordText.value = password;
 }
+writePassword()
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
